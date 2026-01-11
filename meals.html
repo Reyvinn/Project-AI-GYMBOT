@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="meals.css">
+  <title>Meals - GYMBOT</title>
+  </head>
+<body>
+
+  <div id="chat-widget" class="chat-widget hidden">
+    <div id="chat-header">💬 Fitness AI Assistant <span id="closeChat">✖</span></div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatText" placeholder="Ask me anything..." />
+      <button id="sendChat" class="btn">Send</button>
+    </div>
+  </div>
+  <button id="chatToggle" class="chat-toggle hidden">💬</button>
+  <header>
+    <a href="index.html" class="logo">GYM<span>BOT</span></a>
+    
+    <ul class="navbar">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#review">Review</a></li>
+      <li><a href="index.html#about">About us</a></li>
+      <li><a href="meals.html" class="active">Meals</a></li>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="exercise.html">Exercise Menu</a></li>
+    </ul>
+    
+    <div class="top-btn">
+      <a href="sign.html" id="auth-link" class="nav-btn">Join Us</a>
+    </div>
+    
+    </header>
+
+  <section class="meals" id="meals">
+    <h2 class="section-title">🥗 Healthy Meals & Recipes</h2>
+    
+    <div class="input-group meals-search" style="max-width:500px; margin:2rem auto;">
+      <select id="mealSearch">
+        <option value="all" selected>All Meals / Search by Type...</option>
+        <option value="diet">Diet / Weight Loss</option>
+        <option value="protein">High Protein</option>
+        <option value="bulk">Bulking / Weight Gain</option>
+      </select>
+      <button class="btn" id="searchBtn">Search</button>
+    </div>
+    
+    <div id="meals-container" class="meals-list"></div>
+  </section>
+
+  <div id="recipe-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <h2 id="modal-title">Meal Name</h2>
+      
+      <div class="modal-body">
+        
+        <div class="modal-left">
+          <img id="modal-image" src="" alt="Meal Image">
+          <div id="modal-ingredients" class="ingredients-list">
+             </div>
+        </div>
+        
+        <div class="modal-right">
+          <div id="modal-macros" class="macro-info">
+             </div>
+          <div id="modal-steps">
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <script src="meals.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authLink = document.getElementById('auth-link');
+      const user = localStorage.getItem('user');
+
+      if (!user) {
+        alert('Anda harus login untuk mengakses menu Meals.');
+        window.location.href = 'sign.html'; 
+        return;
+      }
+
+      if (user) {
+        authLink.textContent = 'Profile';
+        authLink.href = 'personal.html'; 
+        authLink.classList.add('nav-btn'); 
+        authLink.classList.remove('btn');
+      }
+    });
+  </script>
+</body>
+</html>

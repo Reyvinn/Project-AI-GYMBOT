@@ -1,0 +1,819 @@
+/* -------------------- GLOBAL RESET -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: -apple-system, sans-serif;
+}
+
+
+
+/* -------------------- COLOR VARIABLES -------------------- */
+:root {
+  --bg-color: #000;
+  --snd-bg-color: #000;
+  --text-color: #fff;
+  --main-color: lightblue;
+}
+
+
+
+/* -------------------- BASE ELEMENTS -------------------- */
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+section {
+  /* FIX: Removed min-height: 100vh; to allow sections to take only the height of their content */
+  padding: 10rem 8% 2rem;
+}
+
+
+
+/* -------------------- HEADER & NAVBAR -------------------- */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 9%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s ease;
+}
+
+.logo {
+  font-size: 3rem;
+  color: var(--text-color);
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.logo:hover { transform: scale(1.1); }
+
+span { color: var(--main-color); }
+
+.navbar { display: flex; }
+
+.navbar a {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-left: 4rem;
+  transition: all 0.5s ease;
+  border-bottom: 3px solid transparent;
+}
+.navbar a:hover,
+.navbar a.active {
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color);
+}
+
+/* Navbar button */
+.nav-btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background: transparent;
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+.nav-btn:hover {
+  background: var(--main-color);
+  color: var(--text-color);
+  box-shadow: 0 0 18px var(--main-color);
+}
+
+
+
+/* -------------------- HOME SECTION -------------------- */
+/* -------------------- HOME SECTION (FULL VIDEO BACKGROUND) -------------------- */
+.home {
+  /* Menggunakan min-height 100vh agar video memenuhi satu layar penuh */
+  min-height: 100vh;
+  width: 100%;
+  
+  /* Flexbox untuk menengahkan konten secara Vertikal & Horizontal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Mengatur susunan jadi kolom (atas-bawah) */
+  
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  padding: 0 8%; /* Padding disesuaikan agar seimbang */
+}
+
+/* START: Video Background Styling */
+#video-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Video akan memotong (crop) agar pas di layar tanpa gepeng */
+  z-index: -2;
+}
+
+/* Overlay Hitam agar Teks Lebih Terbaca di atas Video */
+.home::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Sedikit lebih gelap (0.6) agar teks putih kontras */
+  z-index: -1;
+}
+/* END: Video Background Styling */
+
+/* Typography Home Content (Dibuat Rata Tengah) */
+.home-content {
+  text-align: center; /* KUNCI: Membuat semua teks rata tengah */
+  max-width: 800px;   /* Membatasi lebar agar teks tidak terlalu melebar di layar besar */
+}
+
+.home-content h3 { 
+  font-size: 4rem; 
+  font-weight: 700; 
+  margin-bottom: 1rem;
+}
+
+.home-content h1 { 
+  font-size: 6rem; /* Diperbesar sedikit agar lebih gagah */
+  font-weight: 800; 
+  line-height: 1.2; 
+  text-shadow: 0 0 20px rgba(0,0,0,0.5); /* Efek bayangan agar teks pop-up */
+  margin-bottom: 1rem;
+}
+
+.home-content span { 
+  font-size: 3.5rem; 
+  font-weight: 600; 
+  color: var(--main-color);
+}
+
+.home-content p { 
+  font-size: 1.8rem; 
+  margin: 2rem 0 3rem; 
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+
+
+/* -------------------- BUTTONS -------------------- */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background-color: var(--main-color);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  color: var(--bg-color);
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  transition: 0.5s ease;
+}
+.btn:hover {
+  color: var(--text-color);
+  box-shadow: 0 0 1.6rem var(--main-color);
+}
+
+
+
+/* -------------------- CHAT WIDGET (CLEAN & BIG FONT VERSION) -------------------- */
+
+.hidden {
+  display: none !important;
+}
+
+/* 1. TOMBOL CHAT (Floating Button) */
+.chat-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;         /* Ukuran tombol sedikit diperbesar */
+  height: 65px;
+  background: var(--main-color);
+  color: #000;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;     /* Icon chat besar */
+  transition: transform 0.3s ease;
+}
+
+.chat-toggle:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* 2. CONTAINER WIDGET UTAMA */
+.chat-widget {
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  
+  /* UKURAN & POSISI */
+  width: 380px;            /* Lebar pas, tidak terlalu gepeng */
+  height: 600px;           /* Tinggi default */
+  max-height: 70vh;        /* KUNCI: Maksimal 70% layar agar TIDAK MENUTUPI NAVBAR */
+  
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1999;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 3. HEADER CHAT */
+#chat-header {
+  padding: 1.5rem 2rem;
+  background: var(--main-color);
+  color: #000;
+  
+  /* FONT HEADER BESAR */
+  font-size: 1.6rem;       
+  font-weight: 700;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closeChat {
+  cursor: pointer;
+  font-size: 2rem;       /* Tombol X besar agar mudah ditekan */
+  font-weight: bold;
+  transition: transform 0.2s;
+  color: #000;
+}
+
+#closeChat:hover {
+  transform: rotate(90deg);
+  color: #c0392b;
+}
+
+/* 4. AREA PESAN */
+.chat-messages {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;             /* Jarak antar chat renggang */
+  background-color: #1a1a1a;
+  
+  /* Scrollbar Halus */
+  scrollbar-width: thin;
+  scrollbar-color: #444 #1a1a1a;
+}
+
+/* Styling Scrollbar (Chrome/Edge) */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 10px;
+}
+
+/* 5. GELEMBUNG PESAN (BUBBLES) */
+.chat-messages p {
+  padding: 1.2rem 1.6rem;  /* Gelembung tebal */
+  border-radius: 1.2rem;
+  max-width: 85%;
+  line-height: 1.6;
+  
+  /* FONT PESAN (INI YANG PENTING) */
+  font-size: 1.3rem;       /* Ukuran 15px (Jauh lebih besar dari sebelumnya) */
+  
+  word-wrap: break-word;
+  white-space: pre-line;   /* Agar paragraf AI rapi */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.chat-messages .user {
+  background: var(--main-color);
+  color: #000;
+  align-self: flex-end;
+  border-bottom-right-radius: 0.2rem;
+  font-weight: 600;
+}
+
+.chat-messages .ai {
+  background: #2c2c2c;
+  color: #e0e0e0;
+  align-self: flex-start;
+  border-bottom-left-radius: 0.2rem;
+  border: 1px solid #3d3d3d;
+}
+
+/* 6. INPUT AREA */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#chatText {
+  flex-grow: 1;
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 2rem;
+  padding: 1.2rem 1.5rem;  /* Area ketik luas */
+  
+  /* FONT KETIKAN */
+  color: #fff;
+  font-size: 1.5rem;       /* Font input besar (15px) */
+  
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#chatText:focus {
+  border-color: var(--main-color);
+}
+
+#sendChat {
+  margin-left: 1rem;
+  padding: 1rem 2rem;
+  background: var(--main-color);
+  color: #000;
+  border-radius: 2rem;
+  
+  /* FONT TOMBOL SEND */
+  font-weight: 700;
+  font-size: 1.4rem;       
+  
+  cursor: pointer;
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 480px) {
+  .chat-widget {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+    height: 60vh;
+  }
+}
+
+/* RESPONSIVE UNTUK HP */
+@media (max-width: 480px) {
+  .chat-widget {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+    height: 60vh; /* Di HP lebih pendek lagi agar keyboard aman */
+  }
+} 
+
+/* -------------------- EXERCISE SECTION -------------------- */
+.exercises {
+  padding: 5rem 8%;
+  background: var(--bg-color);
+  text-align: center;
+}
+
+/* Tombol filter kategori */
+.exercise-filters {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.filter-btn {
+  padding: 1rem 2.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--main-color);
+  background: transparent;
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background: var(--main-color);
+  color: var(--text-color);
+  box-shadow: 0 0 12px var(--main-color);
+}
+
+.filter-btn.active {
+  background: var(--main-color);
+  color: var(--bg-color);
+  box-shadow: 0 0 18px var(--main-color);
+}
+
+/* Daftar kartu latihan */
+.exercise-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.exercise-card {
+  background: rgba(0,0,0,0.7);
+  border: 2px solid var(--main-color);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.exercise-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 15px var(--main-color);
+}
+
+.exercise-card img {
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+}
+
+.exercise-card h4 {
+  font-size: 2rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+}
+
+.exercise-card p {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+
+
+/* -------------------- REVIEWS SECTION (Updated) -------------------- */
+.reviews {
+  padding: 5rem 8%;
+  background: var(--snd-bg-color);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 3.2rem;
+  color: var(--main-color);
+  margin-bottom: 3rem;
+}
+
+.reviews-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  /* Menyembunyikan scrollbar agar lebih rapi */
+  -ms-overflow-style: none;  /* IE dan Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.reviews-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, dan Opera */
+}
+
+.review-card {
+  flex: 0 0 280px; /* Sedikit memperlebar kartu */
+  min-height: 220px; /* Menetapkan tinggi minimum agar seragam */
+  background: rgba(0,0,0,0.7);
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem; /* Menambah padding internal */
+  color: var(--text-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Mengatur konten secara vertikal */
+  justify-content: flex-start;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 12px var(--main-color);
+}
+
+/* Pengaturan Teks di dalam Kartu Ulasan */
+.review-card h4 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.review-card .stars {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: #f1c40f; /* Memberi warna kuning pada bintang */
+}
+
+.review-card p {
+  font-size: 1.4rem;
+  line-height: 1.6; /* Memperbaiki spasi antar baris */
+  text-align: left; /* Membuat teks komentar rata kiri */
+  flex-grow: 1;
+}
+
+/* -------------------- ADD REVIEW FORM -------------------- */
+#add-review-section {
+  max-width: 600px; /* Membatasi lebar form agar tidak terlalu besar */
+  margin: 4rem auto 0; /* Memberi jarak dari daftar ulasan dan menengahkan form */
+  padding: 3rem;
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  background: rgba(0,0,0,0.7);
+  text-align: left; /* Mengatur teks di dalam form menjadi rata kiri */
+}
+
+#add-review-section h3 {
+  font-size: 2.4rem;
+  color: var(--text-color);
+  text-align: center; /* Judul form tetap di tengah */
+  margin-bottom: 2.5rem;
+}
+
+/* Mengatur grup input (label dan field) */
+.input-group {
+  margin-bottom: 2rem;
+}
+
+.input-group label {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-color);
+}
+
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.4rem;
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--main-color);
+  border-radius: 0.8rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-group select:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #fff; /* Memberi highlight saat input aktif */
+}
+
+/* Mengatur tombol submit */
+#submitReview {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+
+/* -------------------- FAQ SECTION STYLES ADJUSTED -------------------- */
+.faq {
+  /* FIX: Reduced top and bottom padding significantly to close gap */
+  padding: 5rem 8%; 
+  background: var(--bg-color);
+  text-align: center;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  text-align: left;
+}
+
+.faq-container h2 {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  margin-bottom: 2.5rem; /* INCREASED MARGIN for more separation */
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 2.5rem; /* INCREASED PADDING */
+  background: transparent;
+  color: var(--text-color); /* FIX: Restored text color for visibility */
+  font-size: 2.0rem; /* INCREASED FONT SIZE */
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.faq-question:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--main-color);
+}
+
+.faq-question.active {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.faq-question.active:hover {
+  background: var(--main-color);
+  color: var(--bg-color);
+}
+
+.faq-icon {
+  font-size: 2.5rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-question.active .faq-icon {
+  transform: rotate(45deg); /* Change plus to X */
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; 
+}
+
+.faq-answer.active {
+  max-height: 500px; 
+  padding: 0 2.5rem 2.5rem 2.5rem; /* INCREASED PADDING to match question */
+}
+
+.faq-answer p {
+  font-size: 1.7rem; /* INCREASED FONT SIZE */
+  margin: 0;
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--main-color);
+  opacity: 0.8;
+  line-height: 1.8; /* INCREASED LINE HEIGHT for better readability */
+}
+
+
+/* -------------------- ABOUT US SECTION (New) -------------------- */
+.about {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Membuat 2 kolom */
+  align-items: center;
+  gap: 4rem;
+  background: var(--snd-bg-color);
+  /* FIX: Reduced top and bottom padding to close gap */
+  padding: 5rem 8%; 
+}
+
+.about-img img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 1.5rem;
+}
+
+.about-content h2 {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+
+/* Mengganti warna "Us" menjadi warna utama */
+.about-content span {
+  color: var(--main-color);
+}
+
+.about-content h3 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #f0f0f0; /* Sedikit lebih redup dari putih murni */
+}
+
+.about-content p {
+  font-size: 1.6rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+
+/* -------------------- CONTACT SECTION (NEW) -------------------- */
+.contact {
+  /* FIX: Reduced top and bottom padding to close gap */
+  padding: 5rem 8%; 
+  background: var(--bg-color); /* Set to primary bg color */
+  text-align: center;
+}
+
+.contact-info {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 2rem;
+  color: var(--text-color);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
+  border: 1px solid var(--main-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px var(--main-color);
+}
+
+.contact-item i {
+  color: var(--main-color);
+  font-size: 3rem;
+}
+
+.contact-item p {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+
+/* -------------------- SCROLL REVEAL ANIMATION -------------------- */
+
+/* 1. Initial State: Hidden and slightly below its final position */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px); /* Starts 50 pixels below the final spot */
+  transition: all 1s ease-out; /* The animation lasts 1 second */
+}
+
+/* 2. Active State: Fully visible at its final position */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* Pengaturan untuk layar yang lebih kecil (Tablet & HP) */
+@media (max-width: 992px) {
+  .about {
+    grid-template-columns: 1fr; /* Mengubah jadi 1 kolom */
+    text-align: center;
+    gap: 3rem;
+  }
+  .about-img {
+    order: 2; /* Pindahkan gambar ke bawah teks */
+    margin: 0 auto;
+  }
+  .about-content {
+    text-align: center;
+  }
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="personal.css">
+  <title>Personal Info - GYMBOT</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="chat-widget" class="chat-widget hidden">
+    <div id="chat-header">💬 Fitness AI Assistant <span id="closeChat">✖</span></div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatText" placeholder="Ask me anything..." />
+      <button id="sendChat" class="btn">Send</button>
+    </div>
+  </div>
+  <button id="chatToggle" class="chat-toggle hidden">💬</button>
+  <script src="meals.js"></script>
+
+  </body>
+</html>
+  <header>
+    <a href="index.html" class="logo">GYM<span>BOT</span></a>
+
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#review">Review</a></li>
+      <li><a href="index.html#about">About us</a></li>
+      <li><a href="meals.html">Meals</a></li>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="exercise.html">Exercise Menu</a></li>
+    </ul>
+    
+    <div class="top-btn">
+      <a href="sign.html" id="auth-link" class="nav-btn">Join Us</a>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="auth-container">
+      
+      <div class="profile-left">
+        <h2>Your Personal Information</h2>
+        <div id="profile-info"></div>
+
+        <h3 style="margin-top:2rem; color: var(--main-color);">Fitness Goals</h3>
+        <form id="goalsForm" class="auth-form">
+          <div class="input-group">
+            <label for="goals_edit">Your Current Goals</label>
+            <textarea id="goals_edit" rows="3" placeholder="e.g. Build muscle, Lose weight..."></textarea>
+          </div>
+          <button type="submit" class="btn">Save Goals</button>
+        </form>
+        
+        <h3 style="margin-top:2rem; color: var(--main-color);">Edit Age</h3>
+        <form id="ageForm" class="auth-form">
+            <div class="input-group">
+                <label for="age_edit">Age (Tahun)</label>
+                <input type="number" id="age_edit" required placeholder="e.g. 25">
+            </div>
+            <button type="submit" class="btn">Save Age</button>
+        </form>
+
+        <h3 style="margin-top:2rem; color: var(--main-color);">7-Day Habits / Schedule</h3>
+        <form id="scheduleForm" class="auth-form">
+          <div class="input-group"><label for="monday">Monday</label><input type="text" id="monday" /></div>
+          <div class="input-group"><label for="tuesday">Tuesday</label><input type="text" id="tuesday" /></div>
+          <div class="input-group"><label for="wednesday">Wednesday</label><input type="text" id="wednesday" /></div>
+          <div class="input-group"><label for="thursday">Thursday</label><input type="text" id="thursday" /></div>
+          <div class="input-group"><label for="friday">Friday</label><input type="text" id="friday" /></div>
+          <div class="input-group"><label for="saturday">Saturday</label><input type="text" id="saturday" /></div>
+          <div class="input-group"><label for="sunday">Sunday</label><input type="text" id="sunday" /></div>
+          <button type="submit" class="btn">Save Schedule</button>
+        </form>
+
+        <h3 style="margin-top:2rem; color: var(--main-color);">Favorite Meals</h3>
+        <form id="mealsForm" class="auth-form">
+          <div class="input-group">
+            <label for="meals">List Your Favorite Meals</label>
+            <textarea id="meals" rows="4" placeholder="e.g. Grilled chicken, Oatmeal, Smoothie"></textarea>
+          </div>
+          <button type="submit" class="btn">Save Meals</button>
+        </form>
+
+        <button id="editProfile" class="btn" style="margin-top:2rem;">Edit Info</button>
+        <button id="logout" class="btn" style="margin-top:1rem; background:red; color:white;">Logout</button>
+        <a href="index.html" class="btn back-btn" style="margin-top:1rem;">← Back</a>
+      </div>
+
+      <div class="profile-right">
+        <h2 style="color: var(--main-color);">Daily Progress & Tracking</h2>
+
+        <div class="progress-section">
+          <h4>Calorie Intake</h4>
+          <div class="input-group color-picker">
+            <label for="calorieColor">Chart Color:</label>
+            <input type="color" id="calorieColor" value="#4caf50" />
+          </div>
+          <canvas id="calorieChart" width="400" height="200"></canvas>
+          <form id="calorieForm" style="margin-top:1rem; display:flex; gap:10px;">
+            <input type="number" id="calories" placeholder="Add calories (kcal)" required style="flex-grow: 1;">
+            <button type="submit" class="btn">Add</button>
+          </form>
+          </div>
+
+        <hr style="border-color: #333; margin: 2rem 0;">
+
+        <div class="progress-section">
+          <h4>Water Intake</h4>
+          <div class="input-group color-picker">
+            <label for="waterColor">Line Color:</label>
+            <input type="color" id="waterColor" value="#2196f3" />
+          </div>
+          <p id="waterStatus">0 ml</p>
+          <button id="addWater" class="btn">+1 Glass (600ml)</button>
+          </div>
+
+        <hr style="border-color: #333; margin: 2rem 0;">
+
+        <div class="progress-section">
+          <h4>Nutrition Summary</h4>
+          <form id="nutritionForm" style="margin-bottom:1rem;">
+            <div class="input-group">
+                <input type="number" id="protein" placeholder="Protein (g)" required>
+                <input type="number" id="carbs" placeholder="Carbs (g)" required>
+                <input type="number" id="fat" placeholder="Fat (g)" required>
+                <input type="number" id="mealCalories" placeholder="Calories (kcal)" required>
+            </div>
+            <button type="submit" class="btn">Add Meal</button>
+          </form>
+          <canvas id="nutritionChart" width="400" height="200"></canvas>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="personal.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authLink = document.getElementById('auth-link');
+      const logoutBtn = document.getElementById('logout');
+      const user = localStorage.getItem('user');
+
+      // 1. LOGIC UNTUK MENGUNCI HALAMAN (REDIRECT)
+      if (!user) {
+        alert('Anda harus login untuk mengakses halaman profil.');
+        window.location.href = 'sign.html'; 
+        return;
+      }
+
+      // 2. LOGIC UNTUK TOMBOL PROFILE DI HEADER 
+      if (user) {
+        authLink.textContent = 'Profile';
+        authLink.href = 'personal.html'; 
+        authLink.style.display = 'inline-block';
+        authLink.classList.remove('btn');
+        authLink.classList.add('nav-btn');
+      }
+      
+      // 3. LOGIC LOGOUT (Memastikan diarahkan ke sign.html)
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("user"); // Hapus sesi
+            window.location.href = "sign.html"; // Arahkan ke sign.html
+        });
+      }
+    });
+  </script>
+</body>
+</html>

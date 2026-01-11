@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="sign.css">
+  <title>Sign Up / Login - GYMBOT</title>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">GYM<span>BOT</span></a>
+
+    <ul class="navbar">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#review">Review</a></li>
+      <li><a href="index.html#about">About us</a></li>
+      <li><a href="meals.html">Meals</a></li>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="exercise.html">Exercise Menu</a></li>
+    </ul>
+    
+    <div class="top-btn">
+      <a href="sign.html" id="auth-link" class="nav-btn">Join Us / Login</a>
+    </div>
+  </header>
+  <section class="auth-section">
+    <div class="auth-container">
+      
+      <form id="loginForm" class="auth-form" style="display: block;">
+        <h2>Login to Your Account</h2>
+
+        <div class="input-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="input-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+        <p style="margin-top: 1rem; color: #ccc; font-size: 1.4rem;">
+            Belum punya akun? 
+            <a href="#" id="showSignUp" style="color: var(--main-color); text-decoration: underline;">Daftar Sekarang</a>
+        </p>
+        <a href="index.html" class="back-btn">← Back to Home</a>
+      </form>
+      <form id="signUpForm" class="auth-form" style="display: none;">
+        <h2>Create Your Account</h2>
+
+        <div class="form-grid">
+          <div class="form-column">
+            <div class="input-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" required>
+            </div>
+            <div class="input-group">
+              <label for="age">Age</label>
+              <input type="number" id="age" required>
+            </div>
+            <div class="input-group">
+              <label for="gender">Gender</label>
+              <select id="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-column">
+            <div class="input-group">
+              <label for="weight">Weight (kg)</label>
+              <input type="number" id="weight" required>
+            </div>
+            <div class="input-group">
+              <label for="height">Height (cm)</label>
+              <input type="number" id="height" required>
+            </div>
+            <div class="input-group">
+              <label for="goals">Fitness Goals</label>
+              <textarea id="goals" rows="3" placeholder="e.g., Build muscle, Lose weight..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Register & Save</button>
+        <p style="margin-top: 1rem; color: #ccc; font-size: 1.4rem;">
+            Sudah punya akun? 
+            <a href="#" id="showLogin" style="color: var(--main-color); text-decoration: underline;">Login Sekarang</a>
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <script src="sign.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authLink = document.getElementById('auth-link');
+      const user = localStorage.getItem('user');
+
+      if (user) {
+        authLink.textContent = 'Profile';
+        authLink.href = 'personal.html'; 
+        authLink.style.display = 'inline-block';
+        authLink.classList.add('nav-btn');
+        authLink.classList.remove('btn');
+
+      } else {
+        authLink.style.display = 'inline-block';
+        authLink.textContent = 'Join Us / Login';
+        authLink.href = 'sign.html';
+      }
+      
+      const loginForm = document.getElementById('loginForm');
+      const signUpForm = document.getElementById('signUpForm');
+      const showSignUp = document.getElementById('showSignUp');
+      const showLogin = document.getElementById('showLogin');
+
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('mode') === 'edit') {
+        loginForm.style.display = 'none';
+        signUpForm.style.display = 'block';
+
+        document.querySelector("#signUpForm h2").textContent = "Edit Profil Kamu";
+        document.querySelector("#signUpForm button[type='submit']").textContent = "Simpan Perubahan";
+
+        const currentUser = JSON.parse(localStorage.getItem("database_user"));
+        
+        if (currentUser) {
+            document.getElementById("name").value = currentUser.name || "";
+            document.getElementById("email").value = currentUser.email || "";
+            document.getElementById("password").value = currentUser.password || "";
+            document.getElementById("age").value = currentUser.age || "";
+            document.getElementById("gender").value = currentUser.gender || "";
+            document.getElementById("weight").value = currentUser.weight || "";
+            document.getElementById("height").value = currentUser.height || "";
+            document.getElementById("goals").value = currentUser.goals || "";
+        }
+    }
+
+      if (showSignUp && showLogin) {
+          showSignUp.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            signUpForm.style.display = 'block';
+          });
+
+          showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signUpForm.style.display = 'none';
+            loginForm.style.display = 'block';  
+          });
+      }
+    });
+  </script>
+</body>
+</html>

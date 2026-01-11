@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Tracker - GYMBOT</title>
+    <link rel="stylesheet" href="exercise.css"> 
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="chat-widget" class="chat-widget hidden">
+        <div id="chat-header">💬 Fitness AI Assistant <span id="closeChat">✖</span></div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="chatText" placeholder="Ask me anything..." />
+            <button id="sendChat" class="btn">Send</button>
+        </div>
+    </div>
+    <button id="chatToggle" class="chat-toggle hidden">💬</button>
+    <header>
+        <a href="index.html" class="logo">GYM<span>BOT</span></a>
+        
+        <ul class="navbar">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#reviews">Review</a></li> 
+            <li><a href="index.html#about">About us</a></li>
+            <li><a href="meals.html">Meals</a></li>
+            <li><a href="bmi.html">BMI Calculator</a></li>
+            <li><a href="exercise.html" class="active">Exercise Menu</a></li>
+        </ul>
+
+        <div class="top-btn">
+            <a href="sign.html" id="auth-link" class="nav-btn">Join Us</a>
+        </div>
+        <i class='bx bx-menu' id='menu-icon'></i>
+    </header>
+
+    <section class="exercises" id="exercise-tracker">
+        <h2 class="section-title">Workout Tracker & Timer</h2>
+        <p class="section-subtitle">Select an exercise, set your target, and start the countdown!</p>
+        
+        <div class="timer-card reveal">
+            <h3>Current Workout: <span id="currentExerciseName">Not Selected</span></h3>
+            
+            <div class="timer-display">
+                <span id="timerMinutes">00</span>:<span id="timerSeconds">00</span>
+            </div>
+
+            <div class="timer-inputs">
+                <div class="input-group">
+                    <label for="inputReps">Reps/Lap</label>
+                    <input type="number" id="inputReps" value="10" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="inputSets">Sets</label>
+                    <input type="number" id="inputSets" value="3" min="1">
+                </div>
+                <div class="input-group">
+                    <label for="inputDuration">Duration (seconds)</label>
+                    <input type="number" id="inputDuration" value="30" min="5">
+                </div>
+            </div>
+
+            <div class="timer-actions">
+                <button id="startBtn" class="btn">Start Timer</button>
+                <button id="pauseBtn" class="btn hidden">Pause</button>
+                <button id="resetBtn" class="btn">Reset</button>
+            </div>
+
+            <div class="progress-info">
+                <p>Set: <span id="currentSet">0</span> / <span id="totalSets">3</span></p>
+                <p>Lap: <span id="currentLap">0</span> / <span id="totalReps">10</span></p>
+            </div>
+        </div>
+
+        <div class="exercise-header-controls">
+            <h3 class="section-title">Popular Exercises</h3>
+            <div class="controls-group">
+                <button id="clearSelectionsBtn" class="btn"><i class='bx bx-x'></i> Clear Selections</button>
+                <button id="randomizeBtn" class="btn"><i class='bx bx-shuffle'></i> Randomize 3</button>
+                <button id="loadSelectedBtn" class="btn"><i class='bx bx-check'></i> Load Selected Exercise</button>
+            </div>
+        </div>
+        
+        <div class="exercise-list" id="exerciseList"></div>
+    </section>
+
+    <script src="exercise.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const authLink = document.getElementById('auth-link');
+            const user = localStorage.getItem('user');
+
+            // 1. LOGIC UNTUK MENGUNCI HALAMAN (REDIRECT)
+            if (!user) {
+                // Comment dulu alertnya agar tidak mengganggu saat testing
+                // alert('Anda harus login untuk mengakses Exercise Menu.');
+                // window.location.href = 'sign.html'; 
+                // return; 
+            }
+
+            // 2. LOGIC UNTUK TOMBOL PROFILE DI HEADER 
+            if (user) {
+                authLink.textContent = 'Profile';
+                authLink.href = 'personal.html'; 
+                // Tambahkan class nav-btn agar stylingnya benar jika sebelumnya 'btn' biasa
+                authLink.classList.add('nav-btn'); 
+            }
+        });
+    </script>
+</body> 
+</html>

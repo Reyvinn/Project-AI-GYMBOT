@@ -1,0 +1,662 @@
+/* -------------------- GLOBAL RESET -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: -apple-system, sans-serif;
+}
+
+
+
+/* -------------------- COLOR VARIABLES -------------------- */
+:root {
+  --bg-color: #000;
+  --snd-bg-color: #000;
+  --text-color: #fff;
+  --main-color: lightblue;
+}
+
+
+
+/* -------------------- BASE ELEMENTS -------------------- */
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+section {
+  min-height: 100vh;
+  padding: 10rem 8% 2rem;
+}
+
+
+
+/* -------------------- HEADER & NAVBAR -------------------- */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 9%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s ease;
+}
+
+.logo {
+  font-size: 3rem;
+  color: var(--text-color);
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.logo:hover { transform: scale(1.1); }
+
+span { color: var(--main-color); }
+
+.navbar { display: flex; }
+
+.navbar a {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-left: 4rem;
+  transition: all 0.5s ease;
+  border-bottom: 3px solid transparent;
+}
+.navbar a:hover,
+.navbar a.active {
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color);
+}
+
+/* Navbar button */
+.nav-btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background: transparent;
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+.nav-btn:hover {
+  background: var(--main-color);
+  color: var(--text-color);
+  box-shadow: 0 0 18px var(--main-color);
+}
+
+
+
+/* -------------------- BUTTONS -------------------- */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background-color: var(--main-color);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  color: var(--bg-color);
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  transition: 0.5s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn:hover {
+  color: var(--text-color);
+  box-shadow: 0 0 1.6rem var(--main-color);
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(0);
+}
+
+
+
+/* -------------------- MEALS PAGE -------------------- */
+.meals {
+  padding: 5rem 8%;
+  background: var(--snd-bg-color);
+  text-align: center;
+  min-height: auto;
+  margin-top: 8rem;  /* push below header */
+}
+.meals .section-title { 
+  font-size: 3.2rem; 
+  color: var(--main-color); 
+  margin-bottom: 2rem; 
+}
+
+/* ========== SEARCH BAR & INPUTS ========== */
+.input-group {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.meals-search {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  justify-content: center;
+  width: 100%;
+}
+
+#mealSearch {
+  flex: 1;
+  padding: 1.4rem 2rem;
+  font-size: 1.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  font-family: -apple-system, sans-serif;
+}
+
+#mealSearch:focus {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px rgba(173, 216, 230, 0.3);
+}
+
+
+#searchBtn {
+  padding: 1.4rem 3rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: var(--main-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+#searchBtn:hover {
+  background: #fff;
+  box-shadow: 0 0 20px var(--main-color);
+  transform: translateY(-2px);
+}
+
+#searchBtn:active {
+  transform: translateY(0);
+}
+/* ========== AKHIR SEARCH BAR ========== */
+
+.meals-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.meal-card {
+  background: rgba(0,0,0,0.7);
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  cursor: pointer; 
+}
+.meal-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 0 12px var(--main-color); 
+}
+.meal-card img {
+  width: 100%; 
+  height: 200px; 
+  object-fit: cover;
+  border-radius: 0.8rem; 
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+.meal-card h4 { 
+  font-size: 1.6rem; 
+  margin-bottom: 0.5rem; 
+  color: var(--main-color); 
+}
+.meal-card p { 
+  font-size: 1.2rem; 
+  opacity: 0.8; 
+}
+
+/* ======================================= */
+/* MODAL RESEP */
+/* ======================================= */
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 2000; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.9);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: var(--snd-bg-color);
+  color: var(--text-color);
+  margin: 5% auto; 
+  padding: 3rem;
+  border: 2px solid var(--main-color);
+  border-radius: 1.5rem;
+  width: 90%; 
+  max-width: 1100px; 
+  box-shadow: 0 5px 15px rgba(173, 216, 230, 0.4);
+  position: relative;
+  animation: slideIn 0.4s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-btn {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  transition: color 0.3s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: var(--main-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modal-title {
+    font-size: 3.5rem;
+    color: var(--main-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(173, 216, 230, 0.3);
+    padding-bottom: 1rem;
+}
+
+/* Tata Letak 2 Kolom Modal */
+.modal-body {
+    display: flex;
+    gap: 3rem;
+}
+
+/* SISI KIRI: GAMBAR + INGREDIENTS */
+.modal-left {
+    flex: 0 0 50%; /* Ambil 50% ruang */
+}
+/* SISI KANAN: MACROS + INSTRUCTIONS */
+.modal-right {
+    flex: 0 0 50%; /* Ambil 50% ruang */
+}
+
+
+.modal-left img {
+    width: 100%;
+    height: 300px; 
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Styling Makro (di sisi KANAN, akan di atas Instructions) */
+.macro-info {
+    background: rgba(173, 216, 230, 0.1); 
+    border: 1px solid var(--main-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+.macro-info h4 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+.macro-info .info-text {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1rem;
+}
+.macro-info ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+/* Makro harus rata dan menggunakan strong */
+.macro-info li {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    list-style-type: none; 
+}
+.macro-info li strong {
+    font-weight: bold;
+    color: var(--main-color);
+}
+.macro-info li::before {
+    content: "⚡";
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+
+/* Styling Ingredients dan Instructions */
+.ingredients-list h3, .modal-right h3 {
+    font-size: 2.2rem;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--main-color);
+    padding-left: 1rem;
+}
+
+.ingredients-list ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.ingredients-list li {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+/* Ingredients: Memastikan qty menggunakan strong (perbaikan inti) */
+.ingredients-list li strong {
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+
+.ingredients-list li::before {
+    content: "•";
+    color: var(--main-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Styling Langkah-langkah (Instructions) */
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.step-number {
+    background: var(--main-color);
+    color: var(--bg-color);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-right: 1.5rem;
+}
+
+.step-item p {
+    font-size: 1.6rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+}
+
+
+/* ======================================= */
+/* RESPONSIVE CSS */
+/* ======================================= */
+@media (max-width: 1200px) { 
+  .meals-list { 
+    grid-template-columns: repeat(3, 1fr); 
+  } 
+  .modal-content {
+      max-width: 900px;
+  }
+}
+@media (max-width: 992px) {
+     /* Di bawah 992px, jadikan modal 1 kolom */
+    .modal-body {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .modal-left, .modal-right {
+        flex: 1 1 100%;
+    }
+    
+    .modal-left img {
+        height: 250px;
+    }
+
+    .modal-content {
+        max-width: 95%;
+        margin-top: 10%;
+    }
+}
+@media (max-width: 768px) { 
+  .meals-list { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+  
+  /* Responsive search bar untuk mobile */
+  .meals-search {
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+  
+  #searchBtn {
+    width: 100%;
+    padding: 1.4rem 2rem;
+  }
+}
+@media (max-width: 500px) { 
+  .meals-list { 
+    grid-template-columns: 1fr; 
+  } 
+}
+
+/* -------------------- CHAT WIDGET (NEW UNIVERSAL STYLE) -------------------- */
+
+.hidden {
+  display: none !important;
+}
+
+/* 1. TOMBOL CHAT (Floating Button) */
+.chat-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
+  background: var(--main-color);
+  color: #000;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  transition: transform 0.3s ease;
+}
+
+.chat-toggle:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* 2. CONTAINER WIDGET UTAMA */
+.chat-widget {
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  
+  /* UKURAN DINAMIS */
+  width: 380px;
+  height: 600px;
+  max-height: 70vh; /* Agar tidak menutupi Navbar */
+  
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1999;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 3. HEADER CHAT */
+#chat-header {
+  padding: 1.5rem 2rem;
+  background: var(--main-color);
+  color: #000;
+  font-size: 1.6rem; 
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closeChat {
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: transform 0.2s;
+  color: #000;
+}
+
+#closeChat:hover {
+  transform: rotate(90deg);
+  color: #c0392b;
+}
+
+/* 4. AREA PESAN */
+.chat-messages {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #1a1a1a;
+  
+  /* Scrollbar Custom */
+  scrollbar-width: thin;
+  scrollbar-color: #444 #1a1a1a;
+}
+
+.chat-messages::-webkit-scrollbar { width: 6px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background-color: #444; border-radius: 10px; }
+
+/* 5. GELEMBUNG PESAN (FONT BESAR) */
+.chat-messages p {
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.2rem;
+  max-width: 85%;
+  line-height: 1.6;
+  font-size: 1.5rem; /* Font besar (15px) */
+  word-wrap: break-word;
+  white-space: pre-line;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.chat-messages .user {
+  background: var(--main-color);
+  color: #000;
+  align-self: flex-end;
+  border-bottom-right-radius: 0.2rem;
+  font-weight: 600;
+}
+
+.chat-messages .ai {
+  background: #2c2c2c;
+  color: #e0e0e0;
+  align-self: flex-start;
+  border-bottom-left-radius: 0.2rem;
+  border: 1px solid #3d3d3d;
+}
+
+/* 6. INPUT AREA */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#chatText {
+  flex-grow: 1;
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 2rem;
+  padding: 1.2rem 1.5rem;
+  color: #fff;
+  font-size: 1.5rem; /* Font input besar */
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#chatText:focus { border-color: var(--main-color); }
+
+#sendChat {
+  margin-left: 1rem;
+  padding: 1rem 2rem;
+  background: var(--main-color);
+  color: #000;
+  border-radius: 2rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* Responsive HP */
+@media (max-width: 480px) {
+  .chat-widget {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+    height: 60vh;
+  }
+}

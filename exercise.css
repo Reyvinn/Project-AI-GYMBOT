@@ -1,0 +1,730 @@
+/* -------------------- GLOBAL RESET -------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: -apple-system, sans-serif;
+}
+
+
+
+/* -------------------- COLOR VARIABLES -------------------- */
+:root {
+  --bg-color: #000;
+  --snd-bg-color: #000;
+  --text-color: #fff;
+  --main-color: lightblue;
+}
+
+
+
+/* -------------------- BASE ELEMENTS -------------------- */
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+section {
+  min-height: 100vh;
+  padding: 10rem 8% 2rem;
+}
+
+
+
+/* -------------------- HEADER & NAVBAR (DARI GLOBAL) -------------------- */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 9%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s ease;
+}
+
+.logo {
+  font-size: 3rem;
+  color: var(--text-color);
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.logo:hover { transform: scale(1.1); }
+
+span { color: var(--main-color); }
+
+.navbar { display: flex; }
+
+.navbar a {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-left: 4rem;
+  transition: all 0.5s ease;
+  border-bottom: 3px solid transparent;
+}
+.navbar a:hover,
+.navbar a.active {
+  color: var(--main-color);
+  border-bottom: 3px solid var(--main-color);
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background: transparent;
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+.nav-btn:hover {
+  background: var(--main-color);
+  color: var(--text-color);
+  box-shadow: 0 0 18px var(--main-color);
+}
+#menu-icon {
+  font-size: 3.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  display: none; /* Sembunyikan secara default */
+}
+
+
+
+/* -------------------- BUTTONS & UTILITIES -------------------- */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.8rem;
+  background-color: var(--main-color);
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  color: var(--bg-color);
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+  transition: 0.5s ease;
+}
+.btn:hover {
+  color: var(--text-color);
+  box-shadow: 0 0 1.6rem var(--main-color);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.section-title {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.section-subtitle {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0.7;
+}
+
+
+/* -------------------- EXERCISE TRACKER SECTION -------------------- */
+.exercises {
+    padding-top: 12rem; /* Tambahkan ruang untuk header */
+}
+
+
+/* ---------- TIMER CARD ---------- */
+.timer-card {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 3rem;
+  border-radius: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto 4rem;
+  border: 2px solid var(--main-color);
+  box-shadow: 0 0 25px rgba(173, 216, 230, 0.3);
+  text-align: center;
+}
+
+.timer-card h3 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.timer-card #currentExerciseName {
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+.timer-display {
+  font-size: 8rem;
+  font-weight: 900;
+  color: var(--main-color);
+  margin-bottom: 3rem;
+  text-shadow: 0 0 10px rgba(173, 216, 230, 0.5);
+}
+
+.timer-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.timer-inputs .input-group {
+    flex: 1;
+    text-align: center;
+}
+
+.timer-inputs label {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.timer-inputs input {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    border-radius: 0.8rem;
+    border: 1px solid var(--main-color);
+    background: transparent;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    text-align: center;
+}
+.timer-inputs input::-webkit-outer-spin-button,
+.timer-inputs input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.timer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.timer-actions .btn {
+    flex: 1;
+    max-width: 150px;
+    padding: 1.2rem;
+}
+#pauseBtn {
+    background-color: #f39c12; /* Warna kuning/oranye untuk pause */
+    color: var(--bg-color);
+}
+#pauseBtn:hover {
+    box-shadow: 0 0 1.6rem #f39c12;
+    color: var(--text-color);
+}
+
+
+.progress-info {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+.progress-info span {
+    color: var(--main-color);
+    font-weight: 700;
+}
+
+
+/* ---------- EXERCISE LIST & CONTROLS ---------- */
+.exercise-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+}
+.exercise-header-controls .section-title {
+    text-align: left;
+    margin: 0;
+    font-size: 3rem;
+}
+
+/* START PERUBAHAN CSS */
+.controls-group {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+#clearSelectionsBtn {
+    background-color: #e74c3c; /* Red color for clear */
+}
+#clearSelectionsBtn:hover {
+    box-shadow: 0 0 1.6rem #e74c3c;
+    color: var(--text-color);
+}
+
+/* Card Enhancements */
+.exercise-card {
+  position: relative; /* For positioning the close button and toggle */
+  background: rgba(0,0,0,0.7);
+  border: 2px solid var(--main-color);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: left; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Selected State */
+.exercise-card.selected {
+    border-color: #2ecc71; /* Green border when selected */
+    box-shadow: 0 0 20px #2ecc71;
+}
+
+/* Remove Card Button ('X') */
+.remove-card-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 30px;
+    height: 30px;
+    background: #e74c3c;
+    color: var(--text-color);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    z-index: 10;
+    transition: background 0.2s;
+}
+.remove-card-btn:hover {
+    background: #c0392b;
+}
+
+/* Select Toggle (Checkbox/Switch) */
+.select-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10;
+}
+.select-toggle input[type="checkbox"] {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+}
+.select-toggle .bx {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.2s;
+}
+.select-toggle input[type="checkbox"]:checked ~ .bx {
+    color: var(--main-color);
+}
+
+
+/* Empty/Selector Card Style */
+.empty-selector-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    border: 2px dashed rgba(173, 216, 230, 0.5);
+    min-height: 250px; /* Ensure it has height */
+    padding: 3rem;
+    /* Hilangkan efek hover untuk kartu kosong */
+    transform: none !important;
+    box-shadow: none !important;
+}
+.empty-selector-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+.empty-selector-card h4 {
+    color: var(--text-color);
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.full-exercise-selector {
+    padding: 1rem;
+    border-radius: 0.8rem;
+    border: 1px solid var(--main-color);
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--text-color);
+    font-size: 1.6rem;
+    width: 100%;
+    max-width: 80%;
+}
+.empty-selector-card .btn {
+    margin-top: 1.5rem;
+    width: 80%;
+}
+/* END PERUBAHAN CSS */
+
+.exercise-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.exercise-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 15px var(--main-color);
+}
+
+.exercise-card h4 {
+  font-size: 2rem;
+  color: var(--main-color);
+  margin-bottom: 1rem;
+  text-align: center; 
+}
+
+/* Step-by-step list styling */
+.exercise-card .steps {
+    list-style: decimal inside;
+    margin-bottom: 2rem;
+    padding-left: 0;
+    flex-grow: 1; /* Mendorong tombol ke bawah */
+}
+
+.exercise-card .steps li {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.exercise-card .btn {
+    width: 100%;
+}
+
+
+/* ========================================================= */
+/* MEDIA QUERIES (RESPONSIVE)              */
+/* ========================================================= */
+
+/* Tablet View (Max 992px) */
+@media (max-width: 992px) { 
+  html { 
+    font-size: 55%; 
+  } 
+  
+  header { 
+    padding: 2rem 5%; 
+  }
+  
+  .navbar a { 
+    margin-left: 2rem; 
+  }
+
+  .timer-card {
+    padding: 2.5rem;
+  }
+}
+
+/* Mobile/Large Phone View (Max 768px) */
+@media (max-width: 768px) { 
+  html {
+    font-size: 50%;
+  }
+
+  /* Header Mobile (Menu Icon & Navbar Dropdown) */
+  #menu-icon {
+    display: block;
+  }
+
+  .top-btn {
+      display: none;
+  }
+  
+  .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    text-align: left;
+    background: #111;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    transition: all 0.25s ease;
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); 
+  }
+  
+  .navbar.active {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    padding: 1rem 0;
+  }
+
+  .navbar a {
+    display: block;
+    margin: 1.5rem 2.5rem;
+    font-size: 1.8rem;
+    border-bottom: none;
+  }
+
+  /* Timer Card Adjustments */
+  .timer-card {
+    max-width: 100%; /* Lebar penuh di mobile */
+    margin-top: 1rem;
+    padding: 2rem;
+  }
+
+  .timer-inputs {
+    flex-direction: column; /* Input ditumpuk vertikal */
+    gap: 1rem;
+  }
+  .timer-actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .timer-actions .btn {
+      max-width: 100%;
+  }
+  .timer-display {
+      font-size: 6rem;
+  }
+  .progress-info {
+      gap: 2rem;
+      font-size: 1.6rem;
+  }
+  
+  /* Exercise List Adjustments */
+  .exercise-list {
+      gap: 2rem;
+  }
+  .exercise-header-controls {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+  }
+  .exercise-header-controls .section-title {
+      font-size: 2.5rem;
+  }
+  
+  /* Mobile Adjustments for new controls */
+  .controls-group {
+      flex-direction: column;
+      width: 100%;
+      gap: 1rem;
+  }
+  .controls-group .btn {
+      width: 100%;
+  }
+  
+  .remove-card-btn {
+      top: 0.5rem;
+      left: 0.5rem;
+  }
+  .select-toggle {
+      top: 0.5rem;
+      right: 0.5rem;
+  }
+  .empty-selector-card .full-exercise-selector,
+  .empty-selector-card .btn {
+      max-width: 100%;
+  }
+}
+
+/* -------------------- CHAT WIDGET (NEW UNIVERSAL STYLE) -------------------- */
+
+.hidden {
+  display: none !important;
+}
+
+/* 1. TOMBOL CHAT (Floating Button) */
+.chat-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 65px;
+  height: 65px;
+  background: var(--main-color);
+  color: #000;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  transition: transform 0.3s ease;
+}
+
+.chat-toggle:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* 2. CONTAINER WIDGET UTAMA */
+.chat-widget {
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  
+  /* UKURAN DINAMIS */
+  width: 380px;
+  height: 600px;
+  max-height: 70vh; /* Agar tidak menutupi Navbar */
+  
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 1999;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* 3. HEADER CHAT */
+#chat-header {
+  padding: 1.5rem 2rem;
+  background: var(--main-color);
+  color: #000;
+  font-size: 1.6rem; 
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#closeChat {
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: transform 0.2s;
+  color: #000;
+}
+
+#closeChat:hover {
+  transform: rotate(90deg);
+  color: #c0392b;
+}
+
+/* 4. AREA PESAN */
+.chat-messages {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: #1a1a1a;
+  
+  /* Scrollbar Custom */
+  scrollbar-width: thin;
+  scrollbar-color: #444 #1a1a1a;
+}
+
+.chat-messages::-webkit-scrollbar { width: 6px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background-color: #444; border-radius: 10px; }
+
+/* 5. GELEMBUNG PESAN (FONT BESAR) */
+.chat-messages p {
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.2rem;
+  max-width: 85%;
+  line-height: 1.6;
+  font-size: 1.5rem; /* Font besar (15px) */
+  word-wrap: break-word;
+  white-space: pre-line;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.chat-messages .user {
+  background: var(--main-color);
+  color: #000;
+  align-self: flex-end;
+  border-bottom-right-radius: 0.2rem;
+  font-weight: 600;
+}
+
+.chat-messages .ai {
+  background: #2c2c2c;
+  color: #e0e0e0;
+  align-self: flex-start;
+  border-bottom-left-radius: 0.2rem;
+  border: 1px solid #3d3d3d;
+}
+
+/* 6. INPUT AREA */
+.chat-input {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  background: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#chatText {
+  flex-grow: 1;
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 2rem;
+  padding: 1.2rem 1.5rem;
+  color: #fff;
+  font-size: 1.5rem; /* Font input besar */
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#chatText:focus { border-color: var(--main-color); }
+
+#sendChat {
+  margin-left: 1rem;
+  padding: 1rem 2rem;
+  background: var(--main-color);
+  color: #000;
+  border-radius: 2rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* Responsive HP */
+@media (max-width: 480px) {
+  .chat-widget {
+    width: 90%;
+    right: 5%;
+    bottom: 90px;
+    height: 60vh;
+  }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator - JJ FITNESS</title>
+  <link rel="stylesheet" href="bmi.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="chat-widget" class="chat-widget hidden">
+    <div id="chat-header">💬 Fitness AI Assistant <span id="closeChat">✖</span></div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatText" placeholder="Ask me anything..." />
+      <button id="sendChat" class="btn">Send</button>
+    </div>
+  </div>
+  <button id="chatToggle" class="chat-toggle hidden">💬</button>
+  <script src="meals.js"></script>
+
+  </body>
+</html>
+  <header>
+    <a href="index.html" class="logo">GYM<span>BOT</span></a>
+      
+    <ul class="navbar">
+      <li><a href="index.html#home">Home</a></li>
+      <li><a href="index.html#reviews">Review</a></li> 
+      <li><a href="index.html#about">About us</a></li>
+      <li><a href="meals.html">Meals</a></li>
+      <li><a href="bmi.html" class="active">BMI Calculator</a></li>
+      <li><a href="exercise.html">Exercise Menu</a></li>
+      </ul>
+    
+    <div class="top-btn">
+      <a href="sign.html" id="auth-link" class="nav-btn">Join Us</a>
+    </div>
+  </header>
+
+  <section class="bmi" id="bmi-calculator"> 
+    <h2 class="section-title">BMI Calculator</h2> 
+    <p class="section-subtitle">Check your Body Mass Index and understand your health status.</p> 
+    <div class="bmi-card">
+      <div class="input-group">
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" placeholder="Enter weight">
+      </div>
+      <div class="input-group">
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" placeholder="Enter height">
+      </div>
+
+      <button id="calculateBMI" class="calculate-btn">Calculate</button>
+
+      <div id="bmiResult" class="bmi-result hidden">
+        <h3>Your BMI: <span id="bmiValue"></span></h3>
+        <p id="bmiStatus"></p>
+      </div>
+    </div>
+  </section>
+
+  <script src="bmi.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const authLink = document.getElementById('auth-link');
+      // const navProfileLink = document.getElementById('nav-profile-link'); // ❌ Tidak diperlukan lagi
+      const user = localStorage.getItem('user');
+
+      // 1. LOGIC UNTUK MENGUNCI HALAMAN (REDIRECT)
+      if (!user) {
+        alert('Anda harus login untuk mengakses BMI Calculator.');
+        window.location.href = 'sign.html'; 
+        return; 
+      }
+
+      // 2. LOGIC UNTUK TOMBOL PROFILE DI HEADER (nav-btn / border biru)
+      if (user) {
+        authLink.textContent = 'Profile';
+        authLink.href = 'personal.html'; 
+        authLink.classList.remove('btn');
+        authLink.classList.add('nav-btn');
+        
+        // ❌ Baris di bawah ini telah dihapus karena elemen nav-profile-link sudah dihapus dari HTML
+        // if(navProfileLink) navProfileLink.style.display = 'block'; 
+      }
+    });
+  </script>
+</body>
+</html>

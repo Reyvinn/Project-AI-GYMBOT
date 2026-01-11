@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="index.css">
+  <title>GYMBOT</title>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">GYM<span>BOT</span></a>
+
+    <ul class="navbar">
+      <li><a href="#home" class="active" >Home</a></li>
+      <li><a href="#review">Review</a></li>
+      <li><a href="#about">About us</a></li>
+      <li><a href="meals.html">Meals</a></li>
+      <li><a href="bmi.html">BMI Calculator</a></li>
+      <li><a href="exercise.html">Exercise Menu</a></li>
+    </ul>
+    
+    <div class="top-btn">
+      <a href="sign.html" id="auth-link" class="nav-btn">Join Us</a>
+    </div>
+  </header>
+
+  <section class="home" id="home">
+    <video autoplay loop muted playsinline id="video-background">
+      <source src="gymhome.mp4" type="video/mp4">
+    </video>
+
+    <div class="home-content">
+      <h3>Build Your</h3>
+      <h1>Dream Physique</h1>
+      <h3><span class="typing-text"></span><span class="cursor">|</span></h3> 
+      <p>AI Based Workout & Nutrition Plan</p>
+      <a href="sign.html" class="btn" id="home-auth-btn">Join Us Now</a>
+    </div>
+    
+  </section>
+
+  <section class="exercises" id="exercises">
+    <h2 class="section-title">Exercise Recommendations</h2>
+
+    <div class="exercise-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="chest">Chest</button>
+      <button class="filter-btn" data-filter="back">Back</button>
+      <button class="filter-btn" data-filter="legs">Legs</button>
+      <button class="filter-btn" data-filter="shoulders">Shoulders</button>
+      <button class="filter-btn" data-filter="arms">Arms</button>
+    </div>
+
+    <div id="exercise-list" class="exercise-list"></div>
+  </section>
+
+  <section class="reviews" id="review">
+    <h2 class="section-title">⭐ Member Reviews ⭐</h2>
+    <div id="reviews-list" class="reviews-list"></div>
+
+    <div id="add-review-section" class="auth-form">
+      <h3>Add Your Review</h3>
+      <div class="input-group">
+        <label for="reviewStars">Stars</label>
+        <select id="reviewStars" required>
+          <option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="reviewComment">Comment</label>
+        <textarea id="reviewComment" rows="3" required></textarea>
+      </div>
+      <button id="submitReview" class="btn">Submit Review</button>
+    </div>
+  </section>
+
+  <section class="faq reveal" id="faq">
+    <div class="faq-container">
+      <h2 class="section-title">Common <span>Questions</span></h2>
+      <div class="faq-item">
+        <button class="faq-question">
+          How is GYMBOT different from other fitness apps?
+          <i class='bx bx-plus faq-icon'></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            GYMBOT uses advanced AI to create highly personalized recommendations. 
+            Instead of generic plans, our AI considers your body metrics, goals, dietary restrictions, 
+            and even past progress to dynamically adjust your workout and meal plans for optimal results.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Do I need to pay to use the AI Fitness Coach?
+          <i class='bx bx-plus faq-icon'></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            The features, including access to the exercise database, BMI calculator, 
+            and the AI Chat Assistant for general advice, are FREE!.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What kind of exercises are available?
+          <i class='bx bx-plus faq-icon'></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Our database contains exercises for all major muscle groups (Chest, Back, Legs, Shoulders, Arms) 
+            covering bodyweight, dumbbell, and barbell movements. You can filter them in the 'Exercise Menu' section.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I leave a review or feedback?
+          <i class='bx bx-plus faq-icon'></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes! We highly value user feedback. If you are a registered user, you can submit your review 
+            directly in the 'Member Reviews' section of the homepage to share your experience with others.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is my personal data kept secure?
+          <i class='bx bx-plus faq-icon'></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Yes, we prioritize the security of your personal data. All information, including 
+            body metrics and goals, is encrypted and stored securely. We adhere to strict privacy policies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="about reveal" id="about">
+    <div class="about-img">
+      <img src="profile.png" alt="About Us GYMBOT">
+    </div>
+    <div class="about-content">
+      <h2 class="section-title">About <span>Us</span></h2>
+      <h3>Your Personal AI Fitness Coach</h3>
+      <p class="creation-note">
+        Created by Binus University students: William, Francis, and Kevin.
+      </p>
+      <p>
+        At GYMBOT, our mission is to make fitness accessible, personal, and effective for everyone. 
+        We combine advanced AI technology with proven exercise science to provide you with personalized workout 
+        routines, custom meal plans, and real-time guidance.
+      </p>
+      <a href="sign.html" class="btn">Start Your Journey</a>
+    </div>
+  </section>
+
+  <section class="contact reveal" id="contact">
+    <h2 class="section-title">📞 Contact <span>Us</span></h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class='bx bxs-phone-call'></i>
+        <p>+62 812 3456 7890</p>
+      </div>
+      <div class="contact-item">
+        <i class='bx bxl-gmail'></i>
+        <p>gymbot.support@gmail.com</p>
+      </div>
+    </div>
+  </section>
+  <div id="chat-widget" class="chat-widget hidden">
+    <div id="chat-header">💬 Fitness AI Assistant <span id="closeChat">✖</span></div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="chatText" placeholder="Ask me anything..." />
+      <button id="sendChat" class="btn">Send</button>
+    </div>
+  </div>
+  <button id="chatToggle" class="chat-toggle hidden">💬</button>
+
+  <script src="index.js"></script>
+</body>
+</html>
